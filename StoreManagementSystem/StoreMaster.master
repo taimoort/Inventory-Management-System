@@ -1,0 +1,289 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="StoreMaster.master.cs" Inherits="StoreMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Store Management System</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
+    <link rel="stylesheet" href="css/vendor.min.css">
+    <link rel="stylesheet" href="css/elephant.min.css">
+    <link rel="stylesheet" href="css/application.min.css">
+    <link rel="stylesheet" href="css/demo.min.css">
+    <script src="js/vendor.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <style>
+        .onlyshowinprint {
+            display: none;
+        }
+
+        @media print {
+            display:block;
+        }
+
+        .example_c {
+            color: white !important;
+            text-transform: uppercase;
+            background: #00ACED;
+            padding: 3px 12px 3px 12px;
+            border: 4px solid #00ACED !important;
+            border-radius: 4px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .box {
+            box-sizing: border-box;
+            box-shadow: none;
+            outline: none;
+            border: none;
+            color: #ffffff;
+            font-weight: bold;
+            background-color: #333333;
+        }
+
+            .box:hover {
+                color: #ffffff;
+                background-color: black;
+            }
+
+        option {
+            background-color: black;
+            color: white;
+        }
+
+        select:focus {
+            outline: none !important;
+        }
+
+        .example_c:hover {
+            text-decoration: none;
+            color: #ffffff !important;
+            background: #0E8AB9;
+            border-color: #0E8AB9 !important;
+            -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+        }
+
+        .colmstyle {
+            border-right: 1px solid #292929;
+        }
+
+            .colmstyle:hover {
+                /*background-color:black;*/
+            }
+
+        @media (max-width:768px) {
+            .colmstyle {
+                border: 1px solid #292929;
+            }
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body class="layout">
+    <form id="form1" runat="server">
+        <div class="layout-header">
+            <div class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand navbar-brand-center" href="#">
+                        <img class="navbar-brand-logo" src="img/cpd.png" alt="CPD">
+                    </a>
+                    <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse" data-target="#sidenav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="bars">
+                            <span class="bar-line bar-line-1 out"></span>
+                            <span class="bar-line bar-line-2 out"></span>
+                            <span class="bar-line bar-line-3 out"></span>
+                        </span>
+                        <span class="bars bars-x">
+                            <span class="bar-line bar-line-4"></span>
+                            <span class="bar-line bar-line-5"></span>
+                        </span>
+                    </button>
+                    <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="arrow-up"></span>
+                        <span class="ellipsis ellipsis-vertical">
+                            <img class="ellipsis-object" width="32" height="32" src="img/0180441436.jpg" alt="Amir Abdullah">
+                        </span>
+                    </button>
+                </div>
+                <div class="navbar-toggleable">
+                    <nav id="navbar" class="navbar-collapse collapse">
+                        <button class="sidenav-toggler hidden-xs" title="Collapse sidenav ( [ )" aria-expanded="true" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="bars">
+                                <span class="bar-line bar-line-1 out"></span>
+                                <span class="bar-line bar-line-2 out"></span>
+                                <span class="bar-line bar-line-3 out"></span>
+                                <span class="bar-line bar-line-4 in"></span>
+                                <span class="bar-line bar-line-5 in"></span>
+                                <span class="bar-line bar-line-6 in"></span>
+                            </span>
+                        </button>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+                                    <span class="icon-with-child hidden-xs">
+                                        <span class="icon icon-envelope-o icon-lg"></span>
+                                        <span class="badge badge-danger badge-above right">0</span>
+                                    </span>
+                                    <span class="visible-xs-block">
+                                        <span class="icon icon-envelope icon-lg icon-fw"></span>
+                                        <span class="badge badge-danger pull-right">0</span>
+                                        Messages
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                                    <div class="dropdown-header">
+                                        <a class="dropdown-link" href="compose.html">New Message</a>
+                                        <h5 class="dropdown-heading">Recent messages</h5>
+                                    </div>
+                                    <div class="dropdown-body">
+                                        <div class="list-group list-group-divided custom-scrollbar">
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-footer">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+                                    <span class="icon-with-child hidden-xs">
+                                        <span class="icon icon-bell-o icon-lg"></span>
+                                        <span class="badge badge-danger badge-above right">0</span>
+                                    </span>
+                                    <span class="visible-xs-block">
+                                        <span class="icon icon-bell icon-lg icon-fw"></span>
+                                        <span class="badge badge-danger pull-right">0</span>
+                                        Notifications
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                                    <div class="dropdown-header">
+                                        <a class="dropdown-link" href="#">Mark all as read</a>
+                                        <h5 class="dropdown-heading">Recent Notifications</h5>
+                                    </div>
+                                    <div class="dropdown-body">
+                                        <div class="list-group list-group-divided custom-scrollbar">
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-footer">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown hidden-xs">
+                                <button class="navbar-account-btn" data-toggle="dropdown" aria-haspopup="true">
+                                    <img class="rounded" width="36" height="36" src="img/0180441436.jpg" alt="Amir Abdullah">
+                                    Amir Abdullah
+                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+
+                                    <li class="divider"></li>
+                                    <li><a href="Login.aspx">Sign out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="layout-main">
+            <div class="layout-sidebar">
+                <div class="layout-sidebar-backdrop"></div>
+                <div class="layout-sidebar-body">
+                    <div class="custom-scrollbar">
+                        <nav id="sidenav" class="sidenav-collapse collapse">
+                            <ul class="sidenav level-1">
+
+                                <li class="sidenav-heading">Navigation</li>
+
+                                <li class="sidenav-item active">
+                                    <a href="Default.aspx" aria-haspopup="true">
+                                        <span class="sidenav-icon icon icon-home"></span>
+                                        <span class="sidenav-label">Dashboard</span>
+                                    </a>
+
+                                </li>
+
+
+
+                                <li class="sidenav-item">
+                                    <a href="AddCategory.aspx">
+                                        <span class="sidenav-icon icon icon-columns"></span>
+                                        <span class="sidenav-label">Category</span>
+                                    </a>
+                                </li>
+
+                                
+                                <li class="sidenav-item">
+                                    <a href="Supplies.aspx">
+                                        <span class="sidenav-icon icon icon-columns"></span>
+                                        <span class="sidenav-label">Suppliers</span>
+                                    </a>
+                                       
+                                <li class="sidenav-item">
+                                    <a href="Customer.aspx">
+                                        <span class="sidenav-icon icon icon-columns"></span>
+                                        <span class="sidenav-label">Customer</span>
+                                    </a>
+
+                                   
+                                </li>
+                                <li class="sidenav-item">
+                                    <a href="Login.aspx" aria-haspopup="true">
+                                        <span class="sidenav-icon icon icon-lock"></span>
+                                        <span class="sidenav-label">logout</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script src="js/vendor.min.js"></script>
+    <script src="js/elephant.min.js"></script>
+    <script src="js/application.min.js"></script>
+    <script src="js/demo.min.js"></script>
+    <script>
+
+        function setCNIC(txt) {
+            txt.value = txt.value.replace(/[^0-9\n\r-]+/g, '');
+
+        }
+        function IS_eMAIL(txt) {
+            txt.value = txt.value.replace(/^w+[+.w-]*@([w-]+.)*w+[w-]*.([a-z]{2,4}|d+)$/i);
+        }
+        function IS_iNT(txt) {
+            txt.value = txt.value.replace(/[^0-9\n\r]+/g, '');
+        }
+
+        function IS_iNTT(txt) {
+            txt.value = txt.value.replace(/[^0-9\n\r.]+/g, '');
+        }
+        function IS_DignUMERIC(txt) {
+            txt.value = txt.value.replace(/[^0-9\n\r.]+/g, '');
+        }
+
+        function IS_aLPHA(txt) {
+            txt.value = txt.value.replace(/[^a-zA-Z \n\r\/,]+/g, '');
+        }
+
+        function IS_mOBILE(txt) {
+            txt.value = txt.value.replace(/[^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}]+/g, '');
+        }
+    </script>
+</body>
+</html>
